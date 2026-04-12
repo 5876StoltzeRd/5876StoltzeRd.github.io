@@ -72,37 +72,6 @@ const clickableImages = clickableFigures
   .filter((image) => image !== null);
 let activeImageIndex = -1;
 
-// Compact gallery stack: reveal hidden photos on demand.
-const unifiedGallery = document.querySelector('[data-unified-gallery]');
-const galleryStackButton = document.querySelector('[data-gallery-stack]');
-
-if (unifiedGallery && galleryStackButton) {
-  const morePhotos = Array.from(unifiedGallery.querySelectorAll('.more-photo'));
-  const countNode = galleryStackButton.querySelector('[data-hidden-count]');
-  const labelNode = galleryStackButton.querySelector('[data-stack-label]');
-
-  if (countNode) {
-    countNode.textContent = String(morePhotos.length);
-  }
-
-  galleryStackButton.addEventListener('click', () => {
-    const expanded = galleryStackButton.getAttribute('aria-expanded') === 'true';
-    galleryStackButton.setAttribute('aria-expanded', String(!expanded));
-
-    morePhotos.forEach((figure) => {
-      figure.hidden = expanded;
-    });
-
-    if (labelNode) {
-      labelNode.textContent = expanded ? 'View full gallery' : 'Show fewer photos';
-    }
-
-    // Refresh reveal animation state for newly displayed photos.
-    if (!expanded) {
-      morePhotos.forEach((item) => revealObserver.observe(item));
-    }
-  });
-}
 
 function getImageCaption(image) {
   const figure = image.closest('figure');
