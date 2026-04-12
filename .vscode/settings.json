@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^C:/Users/didenkov/AppData/Local/Programs/Python/Python312/python\\.exe -c \"from pathlib import Path; from pypdf import PdfReader; p=Path\\('stoltze-website-requirements\\.pdf'\\); r=PdfReader\\(str\\(p\\)\\); print\\('PAGES', len\\(r\\.pages\\)\\); print\\('\\\\n'\\.join\\(\\(r\\.pages\\[i\\]\\.extract_text\\(\\) or ''\\) for i in range\\(len\\(r\\.pages\\)\\)\\)\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

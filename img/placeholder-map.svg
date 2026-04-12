@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" role="img" aria-label="Map placeholder">
+  <rect width="1000" height="700" fill="#efe7d8" />
+  <path d="M60 580 L280 120 L510 480 L760 180 L930 560" stroke="#6f8164" stroke-width="20" fill="none" />
+  <path d="M160 530 C300 350 430 300 600 420" stroke="#a6bed2" stroke-width="14" fill="none" />
+  <circle cx="510" cy="380" r="32" fill="#7a5a3d" />
+  <text x="500" y="650" text-anchor="middle" fill="#37513e" font-size="34" font-family="Segoe UI, sans-serif">
+    Add location-map.jpg to replace this placeholder
+  </text>
+</svg>
