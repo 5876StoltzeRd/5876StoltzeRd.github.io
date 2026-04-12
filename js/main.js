@@ -17,14 +17,16 @@ if (navToggle && siteNav) {
   });
 }
 
-// Keep image references stable while allowing local preview before final photo curation.
+// Fallback image support for local preview and missing assets.
 document.querySelectorAll('img[data-fallback]').forEach((img) => {
   img.addEventListener('error', () => {
-    img.src = img.dataset.fallback;
+    if (img.dataset.fallback) {
+      img.src = img.dataset.fallback;
+    }
   });
 });
 
-const observer = new IntersectionObserver(
+const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -32,11 +34,31 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.2 }
+  { threshold: 0.16 }
 );
 
-document.querySelectorAll('.reveal').forEach((item) => observer.observe(item));
+document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
 
+// Accessible accordion behavior.
+const accordionRoot = document.querySelector('[data-accordion]');
+if (accordionRoot) {
+  const triggers = accordionRoot.querySelectorAll('.accordion-trigger');
+
+  triggers.forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const panelId = trigger.getAttribute('aria-controls');
+      const panel = panelId ? document.getElementById(panelId) : null;
+
+      trigger.setAttribute('aria-expanded', String(!isExpanded));
+      if (panel) {
+        panel.hidden = isExpanded;
+      }
+    });
+  });
+}
+
+// Lightbox interaction for gallery and chapter images.
 const viewer = document.querySelector('#gallery-lightbox');
 const viewerImage = document.querySelector('#lightbox-image');
 const viewerCaption = document.querySelector('#lightbox-caption');
@@ -44,82 +66,71 @@ const viewerClose = document.querySelector('.lightbox-close');
 const viewerPrev = document.querySelector('.lightbox-prev');
 const viewerNext = document.querySelector('.lightbox-next');
 
-const galleryImages = Array.from(document.querySelectorAll('.gallery img, .chapter-grid img, .tile img'));
-let currentImageIndex = -1;
+const clickableImages = Array.from(document.querySelectorAll('.tile img, .chapter-grid img'));
+let activeImageIndex = -1;
 
-function setViewerImage(index) {
-  const image = galleryImages[index];
-  if (!image || !viewerImage || !viewerCaption) {
+function getImageCaption(image) {
+  const figure = image.closest('figure');
+  const caption = figure ? figure.querySelector('figcaption') : null;
+  return (caption && caption.textContent) || image.alt || 'Property image';
+}
+
+function setLightboxImage(index) {
+  const target = clickableImages[index];
+  if (!target || !viewerImage || !viewerCaption) {
     return;
   }
 
-  viewerImage.src = image.currentSrc || image.src;
-  viewerImage.alt = image.alt;
-  viewerCaption.textContent = image.alt || 'Property image';
-  currentImageIndex = index;
+  viewerImage.src = target.currentSrc || target.src;
+  viewerImage.alt = target.alt || 'Property image';
+  viewerCaption.textContent = getImageCaption(target);
+  activeImageIndex = index;
 }
 
-function openViewer(index) {
+function openLightbox(index) {
   if (!viewer) {
     return;
   }
-
-  setViewerImage(index);
+  setLightboxImage(index);
   viewer.classList.add('open');
   viewer.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 }
 
-function closeViewer() {
+function closeLightbox() {
   if (!viewer) {
     return;
   }
-
   viewer.classList.remove('open');
   viewer.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 }
 
-function stepViewer(delta) {
-  if (!galleryImages.length) {
+function stepLightbox(direction) {
+  if (!clickableImages.length) {
     return;
   }
-
-  const nextIndex = (currentImageIndex + delta + galleryImages.length) % galleryImages.length;
-  setViewerImage(nextIndex);
+  const next = (activeImageIndex + direction + clickableImages.length) % clickableImages.length;
+  setLightboxImage(next);
 }
 
-galleryImages.forEach((image, index) => {
-  image.addEventListener('click', () => openViewer(index));
-
-  image.addEventListener('mousemove', (event) => {
-    const rect = image.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    image.style.transform = `scale(1.04) rotateX(${-y * 4}deg) rotateY(${x * 5}deg)`;
-  });
-
-  image.addEventListener('mouseleave', () => {
-    image.style.transform = '';
-  });
+clickableImages.forEach((image, index) => {
+  image.addEventListener('click', () => openLightbox(index));
 });
 
 if (viewerClose) {
-  viewerClose.addEventListener('click', closeViewer);
+  viewerClose.addEventListener('click', closeLightbox);
 }
-
 if (viewerPrev) {
-  viewerPrev.addEventListener('click', () => stepViewer(-1));
+  viewerPrev.addEventListener('click', () => stepLightbox(-1));
 }
-
 if (viewerNext) {
-  viewerNext.addEventListener('click', () => stepViewer(1));
+  viewerNext.addEventListener('click', () => stepLightbox(1));
 }
-
 if (viewer) {
   viewer.addEventListener('click', (event) => {
     if (event.target === viewer) {
-      closeViewer();
+      closeLightbox();
     }
   });
 }
@@ -130,34 +141,33 @@ document.addEventListener('keydown', (event) => {
   }
 
   if (event.key === 'Escape') {
-    closeViewer();
+    closeLightbox();
   }
-
   if (event.key === 'ArrowRight') {
-    stepViewer(1);
+    stepLightbox(1);
   }
-
   if (event.key === 'ArrowLeft') {
-    stepViewer(-1);
+    stepLightbox(-1);
   }
 });
 
+// Parallax-style movement for scenic strips.
 const parallaxLayers = document.querySelectorAll('.scenic-band-media[data-parallax-speed]');
 
-if (parallaxLayers.length) {
+if (parallaxLayers.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   const updateParallax = () => {
-    const viewCenter = window.innerHeight * 0.5;
+    const viewportCenter = window.innerHeight * 0.5;
 
     parallaxLayers.forEach((layer) => {
       const speed = Number(layer.dataset.parallaxSpeed || 0.2);
-      const parent = layer.parentElement;
-      if (!parent) {
+      const host = layer.parentElement;
+      if (!host) {
         return;
       }
 
-      const rect = parent.getBoundingClientRect();
-      const centerDelta = rect.top + rect.height * 0.5 - viewCenter;
-      layer.style.transform = `translateY(${centerDelta * -speed}px)`;
+      const rect = host.getBoundingClientRect();
+      const delta = rect.top + rect.height * 0.5 - viewportCenter;
+      layer.style.transform = `translateY(${delta * -speed}px)`;
     });
   };
 
