@@ -164,6 +164,51 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+// Timeline card expand/collapse behavior
+const timelineCards = document.querySelectorAll('[data-timeline-card]');
+timelineCards.forEach((card) => {
+  const trigger = card.querySelector('.timeline-card-trigger');
+  const content = card.querySelector('.timeline-card-content');
+
+  if (!trigger || !content) return;
+
+  trigger.addEventListener('click', () => {
+    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+    
+    // Close other cards in the same year group
+    const yearGroup = card.closest('.timeline-year-group');
+    if (yearGroup) {
+      yearGroup.querySelectorAll('[data-timeline-card]').forEach((otherCard) => {
+        if (otherCard !== card) {
+          const otherTrigger = otherCard.querySelector('.timeline-card-trigger');
+          const otherContent = otherCard.querySelector('.timeline-card-content');
+          if (otherTrigger && otherContent) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            otherContent.hidden = true;
+            otherContent.style.maxHeight = '0';
+            otherCard.removeAttribute('data-expanded');
+          }
+        }
+      });
+    }
+
+    // Toggle current card
+    trigger.setAttribute('aria-expanded', String(!isExpanded));
+    if (!isExpanded) {
+      content.hidden = false;
+      card.setAttribute('data-expanded', 'true');
+      // Animate height
+      content.style.maxHeight = content.scrollHeight + 'px';
+    } else {
+      content.style.maxHeight = '0';
+      card.removeAttribute('data-expanded');
+      setTimeout(() => {
+        content.hidden = true;
+      }, 300);
+    }
+  });
+});
+
 // Parallax-style movement for scenic strips.
 const parallaxLayers = document.querySelectorAll('.scenic-band-media[data-parallax-speed]');
 

@@ -43,12 +43,14 @@
     <main id="main-content">
       <section class="hero section" id="overview">
         <div class="hero-media">
-          <img
-            src="img/5876_StoltzeRd_aerial_1.jpg"
-            alt="Mountaintop aerial view with arbutus terrain and broad valley exposure"
-            data-fallback="img/placeholder-landscape.svg"
+          <video
+            src="5876StoltzeRd.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
             fetchpriority="high"
-          />
+          ></video>
         </div>
         <div class="hero-overlay"></div>
         <div class="container hero-content reveal">
@@ -325,97 +327,163 @@
             <h2>Substantial Property Improvements, Year by Year</h2>
           </div>
 
-          <div class="improvements-timeline reveal" aria-label="Property improvements timeline">
-            <article class="improvement-item">
-              <h3>Driveway access upgraded for practical residential use</h3>
-              <p>
-                The route was graded, widened, and surfaced with approximately 5 cm of road base,
-                resulting in a comfortable, usable driveway for normal passenger vehicles.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2021</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves access, day-to-day usability, and buyer confidence.</p>
-            </article>
+          <div class="improvements-timeline reveal" aria-label="Property improvements timeline" data-timeline>
+            <div class="timeline-year-group" data-year="2021">
+              <div class="timeline-year-marker">
+                <span class="timeline-year-label">2021</span>
+              </div>
+              <div class="timeline-cards">
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Driveway access upgraded for practical residential use</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      The route was graded, widened, and surfaced with approximately 5 cm of road base,
+                      resulting in a comfortable, usable driveway for normal passenger vehicles.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves access, day-to-day usability, and buyer confidence.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
 
-            <article class="improvement-item">
-              <h3>Major off-grid power system installed</h3>
-              <p>
-                Approximately 15+ kW of PV, two 5 kW Victron inverters (10 kW combined), roughly
-                40 kWh of lithium battery storage, multiple solar chargers, and a Tesla Level 2 charger.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2022</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Supports modern off-grid living, resilience, strong energy capability, and electric-vehicle charging.</p>
-            </article>
+            <div class="timeline-year-group" data-year="2022">
+              <div class="timeline-year-marker">
+                <span class="timeline-year-label">2022</span>
+              </div>
+              <div class="timeline-cards">
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Major off-grid power system installed</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      Approximately 15+ kW of PV, two 5 kW Victron inverters (10 kW combined), roughly
+                      40 kWh of lithium battery storage, multiple solar chargers, and a Tesla Level 2 charger.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Supports modern off-grid living, resilience, strong energy capability, and electric-vehicle charging.</p>
+                  </div>
+                </article>
 
-            <article class="improvement-item">
-              <h3>Water system reliability upgrades completed</h3>
-              <p>
-                Deep well pump replaced, well pipe replaced, 2,000-gallon water system tank cleaned,
-                and additional incoming-water plus charcoal drinking-water filtration installed with
-                a dedicated drinking-water tap.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2022</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves reliability, convenience, and drinking-water usability.</p>
-            </article>
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Water system reliability upgrades completed</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      Deep well pump replaced, well pipe replaced, 2,000-gallon water system tank cleaned,
+                      and additional incoming-water plus charcoal drinking-water filtration installed with
+                      a dedicated drinking-water tap.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves reliability, convenience, and drinking-water usability.</p>
+                  </div>
+                </article>
 
-            <article class="improvement-item">
-              <h3>Heating and hot-water systems modernized</h3>
-              <p>
-                Split heat pump installed, high-efficiency wood stove added or upgraded as the primary
-                practical heating source, hybrid electric heat-pump water heater installed, and propane
-                on-demand hot-water backup available for operational flexibility.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2022-2023</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves comfort, efficiency, resilience, and year-round livability.</p>
-            </article>
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Dedicated firewood storage shed added</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      A dedicated shed was built to hold approximately 4-5 cords, enough for a full heating season.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Provides practical storage for a full heating season.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
 
-            <article class="improvement-item">
-              <h3>Bathroom fully renovated with modern finishes</h3>
-              <p>
-                Updated with tile finishes, modern glass shower panel, wall-mounted toilet with bidet
-                attachment, and premium finish upgrades.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2023</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves comfort, presentation, and everyday functionality.</p>
-            </article>
+            <div class="timeline-year-group" data-year="2023">
+              <div class="timeline-year-marker">
+                <span class="timeline-year-label">2023</span>
+              </div>
+              <div class="timeline-cards">
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Heating and hot-water systems modernized</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      Split heat pump installed, high-efficiency wood stove added or upgraded as the primary
+                      practical heating source, hybrid electric heat-pump water heater installed, and propane
+                      on-demand hot-water backup available for operational flexibility.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves comfort, efficiency, resilience, and year-round livability.</p>
+                  </div>
+                </article>
 
-            <article class="improvement-item">
-              <h3>Interior finish and storage refresh completed</h3>
-              <p>
-                Water-resistant vinyl plank flooring installed over the older floor, closet shelving added,
-                and selected interior finishes refreshed with premium matte paint with a plaster-like appearance.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2023</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves durability, storage, and overall interior presentation.</p>
-            </article>
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Bathroom fully renovated with modern finishes</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      Updated with tile finishes, modern glass shower panel, wall-mounted toilet with bidet
+                      attachment, and premium finish upgrades.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves comfort, presentation, and everyday functionality.</p>
+                  </div>
+                </article>
 
-            <article class="improvement-item">
-              <h3>Composite deck, stairs, and rear pathway rebuilt</h3>
-              <p>
-                The old deck was fully replaced with a new composite deck; rear wooden stairs were
-                replaced with matching composite stairs; and a small rear pathway was built using the
-                same composite decking.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2023</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves outdoor usability, appeal, convenience, and day-to-day functionality.</p>
-            </article>
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Interior finish and storage refresh completed</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      Water-resistant vinyl plank flooring installed over the older floor, closet shelving added,
+                      and selected interior finishes refreshed with premium matte paint with a plaster-like appearance.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves durability, storage, and overall interior presentation.</p>
+                  </div>
+                </article>
 
-            <article class="improvement-item">
-              <h3>Main window and large sliding door upgraded</h3>
-              <p>
-                Older wood-frame units with gaps were replaced for improved insulation and overall comfort.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2023</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves comfort, efficiency, and overall condition.</p>
-            </article>
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Composite deck, stairs, and rear pathway rebuilt</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      The old deck was fully replaced with a new composite deck; rear wooden stairs were
+                      replaced with matching composite stairs; and a small rear pathway was built using the
+                      same composite decking.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves outdoor usability, appeal, convenience, and day-to-day functionality.</p>
+                  </div>
+                </article>
 
-            <article class="improvement-item">
-              <h3>Dedicated firewood storage shed added</h3>
-              <p>
-                A dedicated shed was built to hold approximately 4-5 cords, enough for a full heating season.
-              </p>
-              <p class="improvement-timing"><strong>Timing:</strong> 2022-2023</p>
-              <p class="improvement-benefit"><strong>Buyer benefit:</strong> Provides practical storage for a full heating season.</p>
-            </article>
+                <article class="timeline-card" data-timeline-card>
+                  <button class="timeline-card-trigger" aria-expanded="false">
+                    <span class="timeline-dot"></span>
+                    <span class="timeline-card-title">Main window and large sliding door upgraded</span>
+                    <span class="timeline-expand-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="timeline-card-content" hidden>
+                    <p>
+                      Older wood-frame units with gaps were replaced for improved insulation and overall comfort.
+                    </p>
+                    <p class="improvement-benefit"><strong>Buyer benefit:</strong> Improves comfort, efficiency, and overall condition.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
           </div>
         </div>
       </section>
