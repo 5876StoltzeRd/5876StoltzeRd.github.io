@@ -626,7 +626,17 @@ summary,
 .gallery-page-full {
   aspect-ratio: unset;
   height: auto;
+  display: block;
   cursor: pointer;
+}
+
+.gallery-page-col .gallery-card,
+.gallery-page-col .gallery-card:nth-child(2),
+.gallery-page-col .gallery-card:nth-child(4),
+.gallery-page-col .gallery-card:nth-child(6),
+.gallery-page-col .gallery-card:nth-child(8) {
+  aspect-ratio: auto;
+  height: auto;
 }
 
 .gallery-page-full img {
