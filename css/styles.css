@@ -1253,6 +1253,10 @@ summary,
 }
 
 @media (max-width: 800px) {
+  .hero {
+    align-items: start;
+  }
+
   .section {
     padding: 4rem 0;
   }
@@ -1300,8 +1304,8 @@ summary,
     width: min(96%, 720px);
     padding-left: clamp(0.65rem, 3vw, 1rem);
     padding-right: clamp(0.65rem, 3vw, 1rem);
-    padding-top: clamp(4.8rem, 12vh, 6.4rem);
-    padding-bottom: 1.8rem;
+    padding-top: clamp(4.9rem, 9vh, 5.8rem);
+    padding-bottom: 0.8rem;
   }
 
   .hero-actions {
