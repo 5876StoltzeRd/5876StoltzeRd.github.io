@@ -876,6 +876,12 @@ summary,
   box-shadow: var(--shadow-strong);
 }
 
+.layout-split figure img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
 .zoning {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
