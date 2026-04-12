@@ -66,7 +66,10 @@ const viewerClose = document.querySelector('.lightbox-close');
 const viewerPrev = document.querySelector('.lightbox-prev');
 const viewerNext = document.querySelector('.lightbox-next');
 
-const clickableImages = Array.from(document.querySelectorAll('.tile img, .chapter-grid img'));
+const clickableFigures = Array.from(document.querySelectorAll('.tile, .chapter-grid figure'));
+const clickableImages = clickableFigures
+  .map((figure) => figure.querySelector('img'))
+  .filter((image) => image !== null);
 let activeImageIndex = -1;
 
 function getImageCaption(image) {
@@ -114,8 +117,18 @@ function stepLightbox(direction) {
   setLightboxImage(next);
 }
 
-clickableImages.forEach((image, index) => {
-  image.addEventListener('click', () => openLightbox(index));
+clickableFigures.forEach((figure, index) => {
+  figure.addEventListener('click', () => openLightbox(index));
+  figure.setAttribute('tabindex', '0');
+  figure.setAttribute('role', 'button');
+  figure.setAttribute('aria-label', 'Open photo viewer');
+
+  figure.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openLightbox(index);
+    }
+  });
 });
 
 if (viewerClose) {
