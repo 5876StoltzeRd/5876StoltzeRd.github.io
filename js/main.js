@@ -17,6 +17,14 @@ if (navToggle && siteNav) {
   });
 }
 
+// Ensure back-to-top works even when hash is already #top.
+document.querySelectorAll('.back-to-top').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
 // Fallback image support for local preview and missing assets.
 document.querySelectorAll('img[data-fallback]').forEach((img) => {
   img.addEventListener('error', () => {

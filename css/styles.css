@@ -1006,6 +1006,32 @@ summary,
   object-fit: contain;
 }
 
+.lifestyle-map {
+  margin-top: 1.25rem;
+}
+
+.lifestyle-map h3 {
+  margin: 0 0 0.65rem;
+  color: #342d26;
+  font-size: 1.08rem;
+}
+
+.map-frame {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  aspect-ratio: 16 / 9;
+  background: #ece2d0;
+}
+
+.map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
 .zoning {
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -1390,6 +1416,10 @@ summary,
 
   .layout-split {
     grid-template-columns: 1fr;
+  }
+
+  .map-frame {
+    aspect-ratio: 4 / 3;
   }
 
   .scenic-band {
