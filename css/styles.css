@@ -355,6 +355,27 @@ summary,
   color: #433b34;
 }
 
+.video-band {
+  position: relative;
+  height: clamp(260px, 44vh, 520px);
+  overflow: hidden;
+}
+
+.video-band-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(22, 24, 27, 0.22), rgba(22, 24, 27, 0.4));
+}
+
 .scenic-band {
   position: relative;
   height: clamp(220px, 38vh, 410px);

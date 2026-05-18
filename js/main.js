@@ -78,6 +78,10 @@ const clickableFigures = Array.from(document.querySelectorAll('.gallery-card'));
 const clickableImages = clickableFigures
   .map((figure) => figure.querySelector('img'))
   .filter((image) => image !== null);
+
+// On the home page, extend the lightbox with the full gallery images.
+document.querySelectorAll('#lightbox-extra-images img').forEach((img) => clickableImages.push(img));
+
 let activeImageIndex = -1;
 
 
