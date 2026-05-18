@@ -47,6 +47,74 @@ const revealObserver = new IntersectionObserver(
 
 document.querySelectorAll('.reveal').forEach((item) => revealObserver.observe(item));
 
+// Defer loading the second video until the hero video is ready and user scrolls near it.
+const heroVideo = document.querySelector('.hero-media video');
+const deferredVideo = document.querySelector('.video-band-media[data-src]');
+
+function loadDeferredVideo() {
+  if (!deferredVideo || deferredVideo.getAttribute('src')) {
+    return;
+  }
+
+  const deferredSrc = deferredVideo.dataset.src;
+  if (!deferredSrc) {
+    return;
+  }
+
+  deferredVideo.src = deferredSrc;
+  deferredVideo.load();
+
+  const playPromise = deferredVideo.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(() => {
+      // Ignore autoplay block; user interaction will start playback.
+    });
+  }
+}
+
+function setupDeferredVideoLoading() {
+  if (!deferredVideo) {
+    return;
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    loadDeferredVideo();
+    return;
+  }
+
+  const deferredVideoObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          loadDeferredVideo();
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  deferredVideoObserver.observe(deferredVideo);
+}
+
+if (deferredVideo) {
+  let deferredSetupStarted = false;
+  const beginDeferredSetup = () => {
+    if (deferredSetupStarted) {
+      return;
+    }
+    deferredSetupStarted = true;
+    setupDeferredVideoLoading();
+  };
+
+  if (heroVideo && heroVideo.readyState < 2) {
+    heroVideo.addEventListener('loadeddata', beginDeferredSetup, { once: true });
+    window.setTimeout(beginDeferredSetup, 4000);
+  } else {
+    beginDeferredSetup();
+  }
+}
+
 // Accessible accordion behavior.
 const accordionRoot = document.querySelector('[data-accordion]');
 if (accordionRoot) {
